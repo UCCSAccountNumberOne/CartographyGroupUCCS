@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GitHub Map Test</title>
+    <!-- 1. Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* 2. Style the map container */
+        #map { height: 500px; width: 100%; }
+    </style>
+</head>
+<body>
+    <h3>Test Cartographic Map</h3>
+    <div id="map"></div>
+
+    <!-- 3. Include Leaflet JavaScript -->
+    <script src="unpkg.com"></script>
+    <script>
+        // 4. Initialize the map
+        var map = L.map('map').setView([51.505, -0.09], 13);
+
+        // 5. Add base layer tiles (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // 6. Inline GeoJSON cartographic data
+        var testData = {
+            "type": "FeatureCollection",
+            "features": [{
+                "type": "Feature",
+                "properties": {"name": "Test Point"},
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [-0.09, 51.505]
+                }
+            }]
+        };
+
+        // 7. Add GeoJSON to the map
+        L.geoJSON(testData).addTo(map).bindPopup("Cartographic data test point.");
+    </script>
+</body>
+</html>
